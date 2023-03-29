@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "genie/dat/DatFile.h"
+#include "data.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -37,6 +38,8 @@ private:
   QMenu *fileMenu;
   QAction *loadAction; 
   QAction *exitAction;
+
+  Data data; 
 
 }; 
 

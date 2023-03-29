@@ -25,6 +25,7 @@ add_executable(
     main.cpp
     mainwindow.cpp
     ids.h
+    data.cpp
     qt-genie.qrc
 )
 set_property(TARGET qt-genie PROPERTY CXX_STANDARD 17)
