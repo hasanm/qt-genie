@@ -57,5 +57,30 @@ void MainWindow::onLoad()
       const char *c_str2 = ba.data();
 
       df->load(c_str2);
+
+
+      QString data; 
+      QString classFileName(":/resources/class.txt");
+      QFile file(classFileName);
+      if(!file.open(QIODevice::ReadOnly)) {
+        qDebug()<<"filenot opened";
+      }
+      else
+        {
+          qDebug()<<"file opened";
+          data = file.readAll();
+        }
+      
+      file.close();
+
+      qDebug()<<data;
+
+      for (genie::Civ civ : df->Civs) {
+        if (civ.Name != "Gaia") {
+
+          std::cout << civ.Name << std::endl; 
+        } 
+      }
+         
     }
 }

@@ -19,11 +19,13 @@ include_directories(
         "genieutils/include"
         "."
 )
+
 add_executable(
     qt-genie
     main.cpp
     mainwindow.cpp
     ids.h
+    qt-genie.qrc
 )
 set_property(TARGET qt-genie PROPERTY CXX_STANDARD 17)
 
