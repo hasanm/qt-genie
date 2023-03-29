@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "genie/dat/DatFile.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -31,10 +32,12 @@ private slots:
   void onLoad();
 private:
 
+  genie::DatFile *df; 
+
   QMenu *fileMenu;
   QAction *loadAction; 
-  QAction *exitAction; 
-  
+  QAction *exitAction;
+
 }; 
 
 #endif

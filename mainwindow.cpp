@@ -44,4 +44,18 @@ MainWindow::~MainWindow()
 
 void MainWindow::onLoad()
 {
+
+  QString fileName = QFileDialog::getOpenFileName(this, "Open empires2_x2_p1.dat", "/data", "Dat (*.dat)");
+  if (QFile::exists(fileName))
+    {
+      df = new genie::DatFile();
+      df->setGameVersion(genie::GV_LatestDE2);
+      qDebug() << "Loading " << fileName << " ...";
+
+
+      QByteArray ba = fileName.toLocal8Bit();
+      const char *c_str2 = ba.data();
+
+      df->load(c_str2);
+    }
 }
