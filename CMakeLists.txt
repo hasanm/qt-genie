@@ -14,7 +14,7 @@ include_directories(
 )
 add_executable(
     qt-genie
-    qt-genie.cpp
+    main.cpp
     ids.h
 )
 set_property(TARGET qt-genie PROPERTY CXX_STANDARD 17)
