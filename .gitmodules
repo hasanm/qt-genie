@@ -1,0 +1,3 @@
+[submodule "genieutils"]
+	path = genieutils
+	url = https://github.com/Tapsa/genieutils
