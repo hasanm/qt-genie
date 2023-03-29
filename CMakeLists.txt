@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 3.10)
 project(qt-genie VERSION 1.0)
 
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
+
+find_package(Qt5 COMPONENTS Widgets REQUIRED)
+
 if (APPLE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14") #For OSX
 else()
@@ -15,7 +22,10 @@ include_directories(
 add_executable(
     qt-genie
     main.cpp
+    mainwindow.cpp
     ids.h
 )
 set_property(TARGET qt-genie PROPERTY CXX_STANDARD 17)
-target_link_libraries(qt-genie genieutils)
+
+
+target_link_libraries(qt-genie genieutils Qt5::Widgets)
