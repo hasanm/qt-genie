@@ -42,9 +42,9 @@ MainWindow::MainWindow(QWidget *parent) :
   speedEdit = new QLineEdit(this);                           
   contentLayout->addWidget(speedEdit, 1, 5);
 
-  listView = new QListView;
+  armorView = new QListView;
   contentLayout->addWidget(new QLabel("Armor Classes"), 2, 0);
-  contentLayout->addWidget(listView, 2, 1);
+  contentLayout->addWidget(armorView, 2, 1);
 
   attackView = new QListView;
   contentLayout->addWidget(new QLabel("Attack Classes"), 2, 2);
@@ -175,6 +175,6 @@ void MainWindow::onChange(const QString &text)
     armors << QString("%1").arg(armor.Amount);
   }
 
-  QStringListModel *armorModel = new QStringListModel(armors,this);
-  listView->setModel(armorModel);
+  armorModel = new QStringListModel(armors,this);
+  armorView->setModel(armorModel);
 }

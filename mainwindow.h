@@ -20,6 +20,7 @@ class QGridLayout;
 class QScrollArea;
 class QScrollBar;
 class QLineEdit;
+class QStringListModel;
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
@@ -49,9 +50,10 @@ private:
   QLineEdit *nameEdit;
   QLineEdit *speedEdit;
 
-  QListView *listView;
+  QListView *armorView;
+  QStringListModel *armorModel;
 
-  QListView *attackView; 
+  QListView *attackView;
 
   Data data; 
 
