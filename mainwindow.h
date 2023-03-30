@@ -54,6 +54,7 @@ private:
   QStringListModel *armorModel;
 
   QListView *attackView;
+  QStringListModel *attackModel; 
 
   Data data; 
 

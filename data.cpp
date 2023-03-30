@@ -17,10 +17,12 @@ Data::Data()
 {
   QString classFileName(":/resources/class.txt");
   QString unitFileName (":/resources/units.txt");
+  QString whiteListFileName (":/resources/whitelist.txt");  
 
 
   armors = readFile(classFileName);
   units = readFile(unitFileName);
+  whiteLists = readFile(whiteListFileName);
 
   for (auto token : armors){
     armorNames[token.first] = token.second; 
@@ -28,6 +30,11 @@ Data::Data()
 
   for (auto token : units) {
     unitNames[token.first] = token.second;
+  }
+
+
+  for (auto token :whiteLists) {
+    whiteListMap[token.first] = 1;
   }
 
 

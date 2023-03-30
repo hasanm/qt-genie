@@ -1,6 +1,7 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
-    <file>resources/units.txt</file>
-    <file>resources/class.txt</file>
+  <file>resources/units.txt</file>
+  <file>resources/whitelist.txt</file>  
+  <file>resources/class.txt</file>
 </qresource>
 </RCC>

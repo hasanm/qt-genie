@@ -111,8 +111,7 @@ void MainWindow::onLoad()
             }
 
 
-            if (unit.Speed > 0 &&
-                (unit.BaseID == 38
+            if ((unit.BaseID == 38
                                        || unit.BaseID == 4
                                        || unit.BaseID == 6
                                        || unit.BaseID == 7
@@ -130,6 +129,7 @@ void MainWindow::onLoad()
                                        || unit.BaseID == 1234
                                        || unit.BaseID == 1747
                                        || unit.BaseID == 1007
+                 || (data.whiteListMap.find(unit.BaseID) != data.whiteListMap.end())
                  )) {
               i++;
               cout << "---------------" << endl;
@@ -155,8 +155,8 @@ void MainWindow::onChange(const QString &text)
   std::uint32_t id = data.nameMap[text.toStdString()]; 
   qDebug() << text << ", " << id;
 
-  genie::Unit unit = data.unitMap[id]; 
-  
+  genie::Unit unit = data.unitMap[id];
+
   classEdit->setText(QString("%1").arg(unit.BaseID));
   nameEdit->setText(QString::fromStdString(data.unitNames[id]));
   speedEdit->setText(QString("%1").arg(unit.Speed));
@@ -167,7 +167,6 @@ void MainWindow::onChange(const QString &text)
     cout << "Attack : " << data.armorNames[attack.Class] <<  ", "  << attack.Class << " => "  << attack.Amount << endl;
   }
                         
-  uint16_t pierce_armor = 0;
   QStringList armors;  
   for (genie::unit::AttackOrArmor armor : unit.Type50.Armours) {
     cout << "Armor : " << data.armorNames[armor.Class]<< ", "<< armor.Class << " => "  << armor.Amount << endl;
@@ -177,4 +176,16 @@ void MainWindow::onChange(const QString &text)
 
   armorModel = new QStringListModel(armors,this);
   armorView->setModel(armorModel);
+
+
+  
+  QStringList attacks; 
+  for (genie::unit::AttackOrArmor attack : unit.Type50.Attacks) {
+    cout << "Attack : " << data.armorNames[attack.Class] <<  ", "  << attack.Class << " => "  << attack.Amount << endl;
+    attacks << QString::fromStdString(data.armorNames[attack.Class]);
+    attacks << QString("%1").arg(attack.Amount);
+  }
+
+  attackModel = new QStringListModel(attacks, this);
+  attackView->setModel(attackModel);
 }
