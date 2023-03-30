@@ -46,6 +46,10 @@ MainWindow::MainWindow(QWidget *parent) :
   contentLayout->addWidget(new QLabel("Armor Classes"), 2, 0);
   contentLayout->addWidget(listView, 2, 1);
 
+  attackView = new QListView;
+  contentLayout->addWidget(new QLabel("Attack Classes"), 2, 2);
+  contentLayout->addWidget(attackView, 2, 3);
+
   rootLayout->addWidget(top);
   rootLayout->addWidget(content);
   setCentralWidget(root);

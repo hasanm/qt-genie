@@ -49,7 +49,9 @@ private:
   QLineEdit *nameEdit;
   QLineEdit *speedEdit;
 
-  QListView *listView; 
+  QListView *listView;
+
+  QListView *attackView; 
 
   Data data; 
 
