@@ -1,3 +1,4 @@
+#include <iostream>
 #include <QtWidgets>
 #include <QString>
 #include <QFile>
@@ -20,6 +21,14 @@ Data::Data()
 
   armors = readFile(classFileName);
   units = readFile(unitFileName);
+
+  for (auto token : armors){
+    armorNames[token.first] = token.second; 
+  }
+
+  for (auto token : units) {
+    unitNames[token.first] = token.second;
+  }
 
 
 }

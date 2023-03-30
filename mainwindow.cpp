@@ -20,7 +20,29 @@ MainWindow::MainWindow(QWidget *parent) :
   QWidget *top = new QWidget(this);
   QHBoxLayout *topLayout = new QHBoxLayout(top);
 
+  QWidget *content = new QWidget(this);
+  QGridLayout *contentLayout = new QGridLayout(content);
+
+
+  contentLayout->addWidget(new QLabel("Select"), 0, 0);
+  combo = new QComboBox(this);
+  contentLayout->addWidget(combo, 0, 1);
+
+
+  connect(combo, &QComboBox::currentTextChanged, this, &MainWindow::onChange); 
+
+  contentLayout->addWidget(new QLabel("Class"), 1, 0);
+  classEdit = new QLineEdit(this);
+  contentLayout->addWidget(classEdit, 1, 1);
+  contentLayout->addWidget(new QLabel("Name"), 1, 2);
+  nameEdit = new QLineEdit(this);
+  contentLayout->addWidget(nameEdit, 1, 3);
+  contentLayout->addWidget(new QLabel("Speed"), 1, 4);
+  speedEdit = new QLineEdit(this);                           
+  contentLayout->addWidget(speedEdit, 1, 5);  
+
   rootLayout->addWidget(top);
+  rootLayout->addWidget(content);
   setCentralWidget(root);
 
 
@@ -58,12 +80,65 @@ void MainWindow::onLoad()
 
       df->load(c_str2);
 
+
+      int i = 0;
+      std::set<std::uint32_t> used;
+
+      QStringList items;
+
+
       for (genie::Civ civ : df->Civs) {
         if (civ.Name != "Gaia") {
+          long unitsize = civ.Units.size();
+          long unitctr = 0;
 
-          std::cout << civ.Name << std::endl; 
+          for (genie::Unit unit : civ.Units) {
+            unitctr++;
+
+            if (used.find(unit.BaseID) != used.end()) {
+              continue; 
+            } else {
+              used.insert(unit.BaseID);
+            }
+
+
+            if (unit.Speed > 0 &&
+                (unit.BaseID == 38
+                                       || unit.BaseID == 4
+                                       || unit.BaseID == 6
+                                       || unit.BaseID == 7
+                                       || unit.BaseID == 93
+                                       || unit.BaseID == 358
+                                       || unit.BaseID == 359
+                                       || unit.BaseID == 329
+                                       || unit.BaseID == 330
+                                       || unit.BaseID == 207
+                                       || unit.BaseID == 282
+                                       || unit.BaseID == 291
+                                       || unit.BaseID == 567
+                                       || unit.BaseID == 752
+                                       || unit.BaseID == 1234
+                                       || unit.BaseID == 1747
+                                       || unit.BaseID == 1007                                       
+                 )) {
+              i++;
+              cout << "---------------" << endl;
+              cout << unit.Name << ", " << data.unitNames[unit.BaseID] << ", Speed: " << unit.Speed << endl;
+              items << QString::fromStdString(unit.Name); 
+            }
+
+          }
         } 
       }
+
+      QStringListModel *typeModel = new QStringListModel(items,this);
+
+      combo->setModel(typeModel);
          
     }
+}
+
+void MainWindow::onChange(const QString &text)
+{
+  qDebug() << text;
 }

@@ -12,14 +12,17 @@ class Data {
   ~Data();
 
 
+  
+  
 
-  vector<pair <int, string> > armors;
-  vector<pair <int, string> > units;  
+  map<int, string> armorNames;
+  map<int, string> unitNames; 
 
  private:
   
   /* Members */
-
+  vector<pair <int, string> > armors;
+  vector<pair <int, string> > units;
   
 
   /* Functions */
