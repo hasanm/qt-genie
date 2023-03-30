@@ -3,7 +3,12 @@
 
 #include <QString>
 #include <set>
-using namespace std; 
+
+
+#include "genie/dat/DatFile.h"
+
+using namespace std;
+
 
 class Data {
 
@@ -11,12 +16,11 @@ class Data {
   Data();
   ~Data();
 
-
-  
-  
-
   map<int, string> armorNames;
-  map<int, string> unitNames; 
+  map<int, string> unitNames;
+
+  map<std::uint32_t, genie::Unit> unitMap;
+  map<std::string, std::uint32_t> nameMap; 
 
  private:
   

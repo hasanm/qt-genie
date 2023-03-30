@@ -124,7 +124,9 @@ void MainWindow::onLoad()
               i++;
               cout << "---------------" << endl;
               cout << unit.Name << ", " << data.unitNames[unit.BaseID] << ", Speed: " << unit.Speed << endl;
-              items << QString::fromStdString(unit.Name); 
+              items << QString::fromStdString(unit.Name);
+              data.unitMap[unit.BaseID] = unit;
+              data.nameMap[unit.Name] = unit.BaseID;
             }
 
           }
@@ -140,5 +142,22 @@ void MainWindow::onLoad()
 
 void MainWindow::onChange(const QString &text)
 {
-  qDebug() << text;
+  std::uint32_t id = data.nameMap[text.toStdString()]; 
+  qDebug() << text << ", " << id;
+
+  genie::Unit unit = data.unitMap[id]; 
+  
+  classEdit->setText(QString::fromStdString(unit.Name));
+  nameEdit->setText(QString::fromStdString(data.unitNames[id]));
+  speedEdit->setText(QString("%1").arg(unit.Speed));
+
+
+  for (genie::unit::AttackOrArmor attack : unit.Type50.Attacks) {
+    cout << "Attack : " << data.armorNames[attack.Class] <<  ", "  << attack.Class << " => "  << attack.Amount << endl; 
+  }
+                        
+  uint16_t pierce_armor = 0;
+  for (genie::unit::AttackOrArmor armor : unit.Type50.Armours) {
+    cout << "Armor : " << data.armorNames[armor.Class]<< ", "<< armor.Class << " => "  << armor.Amount << endl;
+  }
 }
