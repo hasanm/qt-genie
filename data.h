@@ -11,6 +11,7 @@ class Data {
 
  private:
   void readFile(QString fileName);
+  std::pair<int, std::string> tokenize(QString s);
 }; 
 
 #endif
