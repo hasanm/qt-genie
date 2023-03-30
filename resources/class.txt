@@ -21,6 +21,7 @@
     "24": "Crossbowman"
     "25": "Monk"
     "27": "Spears"
+    "28": "Cavalry Archer"
     "29": "Eagle"    
     "30": "Camel"
     "31": "Ignore Armor - Unused"

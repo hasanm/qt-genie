@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QListView>
 #include "genie/dat/DatFile.h"
 #include "data.h"
 
@@ -46,7 +47,9 @@ private:
 
   QLineEdit *classEdit;
   QLineEdit *nameEdit;
-  QLineEdit *speedEdit; 
+  QLineEdit *speedEdit;
+
+  QListView *listView; 
 
   Data data; 
 

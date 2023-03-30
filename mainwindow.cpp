@@ -4,6 +4,7 @@
 #include <QHBoxLayout>
 #include <QGridLayout>
 #include <QIcon>
+#include <QListView>
 
 
 #include "mainwindow.h"
@@ -39,7 +40,11 @@ MainWindow::MainWindow(QWidget *parent) :
   contentLayout->addWidget(nameEdit, 1, 3);
   contentLayout->addWidget(new QLabel("Speed"), 1, 4);
   speedEdit = new QLineEdit(this);                           
-  contentLayout->addWidget(speedEdit, 1, 5);  
+  contentLayout->addWidget(speedEdit, 1, 5);
+
+  listView = new QListView;
+  contentLayout->addWidget(new QLabel("Armor Classes"), 2, 0);
+  contentLayout->addWidget(listView, 2, 1);
 
   rootLayout->addWidget(top);
   rootLayout->addWidget(content);
@@ -107,6 +112,7 @@ void MainWindow::onLoad()
                                        || unit.BaseID == 4
                                        || unit.BaseID == 6
                                        || unit.BaseID == 7
+                                       || unit.BaseID == 8                 
                                        || unit.BaseID == 93
                                        || unit.BaseID == 358
                                        || unit.BaseID == 359
@@ -119,7 +125,7 @@ void MainWindow::onLoad()
                                        || unit.BaseID == 752
                                        || unit.BaseID == 1234
                                        || unit.BaseID == 1747
-                                       || unit.BaseID == 1007                                       
+                                       || unit.BaseID == 1007
                  )) {
               i++;
               cout << "---------------" << endl;
@@ -133,9 +139,9 @@ void MainWindow::onLoad()
         } 
       }
 
-      QStringListModel *typeModel = new QStringListModel(items,this);
+      QStringListModel *baseModel = new QStringListModel(items,this);
 
-      combo->setModel(typeModel);
+      combo->setModel(baseModel);
          
     }
 }
@@ -147,17 +153,24 @@ void MainWindow::onChange(const QString &text)
 
   genie::Unit unit = data.unitMap[id]; 
   
-  classEdit->setText(QString::fromStdString(unit.Name));
+  classEdit->setText(QString("%1").arg(unit.BaseID));
   nameEdit->setText(QString::fromStdString(data.unitNames[id]));
   speedEdit->setText(QString("%1").arg(unit.Speed));
 
 
+
   for (genie::unit::AttackOrArmor attack : unit.Type50.Attacks) {
-    cout << "Attack : " << data.armorNames[attack.Class] <<  ", "  << attack.Class << " => "  << attack.Amount << endl; 
+    cout << "Attack : " << data.armorNames[attack.Class] <<  ", "  << attack.Class << " => "  << attack.Amount << endl;
   }
                         
   uint16_t pierce_armor = 0;
+  QStringList armors;  
   for (genie::unit::AttackOrArmor armor : unit.Type50.Armours) {
     cout << "Armor : " << data.armorNames[armor.Class]<< ", "<< armor.Class << " => "  << armor.Amount << endl;
+    armors << QString::fromStdString(data.armorNames[armor.Class]);
+    armors << QString("%1").arg(armor.Amount);
   }
+
+  QStringListModel *armorModel = new QStringListModel(armors,this);
+  listView->setModel(armorModel);
 }
