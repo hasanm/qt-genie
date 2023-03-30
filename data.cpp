@@ -17,17 +17,21 @@ Data::Data()
   QString classFileName(":/resources/class.txt");
   QString unitFileName (":/resources/units.txt");
 
-  readFile(classFileName);
-  readFile(unitFileName);
+
+  armors = readFile(classFileName);
+  units = readFile(unitFileName);
+
+
 }
 
 Data::~Data() {
 }
 
 
-void Data::readFile(QString fileName)
+vector<pair<int, string>> Data::readFile(QString fileName)
 {
   QFile file (fileName);
+  vector <pair <int, string>> result; 
 
   if (!file.open(QIODevice::ReadOnly)) {
     qDebug() << fileName << " not found"; 
@@ -36,11 +40,13 @@ void Data::readFile(QString fileName)
 
     while (!file.atEnd()){
       QByteArray line = file.readLine();
-      tokenize(line);
+      pair<int, string> token = tokenize(line);
+      result.push_back(token);
     }
   }
 
   file.close();
+  return result; 
 }
 
 pair<int, string> Data::tokenize(QString in)
@@ -53,15 +59,10 @@ pair<int, string> Data::tokenize(QString in)
   trim(first);
   first = erase_all_copy(first, "\"");
 
-  qDebug() << in << " : " << end;
-  qDebug() << first.c_str();
-
   start = end + 1;
   string second = s.substr(start);
   trim(second);
   second = erase_all_copy(second, "\"");
-
-  qDebug() << second.c_str();
 
   pair <int, string> result = make_pair(stoi(first), second);
 

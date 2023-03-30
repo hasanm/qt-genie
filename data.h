@@ -2,6 +2,8 @@
 #define DATA_H
 
 #include <QString>
+#include <set>
+using namespace std; 
 
 class Data {
 
@@ -9,9 +11,22 @@ class Data {
   Data();
   ~Data();
 
+
+
+  vector<pair <int, string> > armors;
+  vector<pair <int, string> > units;  
+
  private:
-  void readFile(QString fileName);
-  std::pair<int, std::string> tokenize(QString s);
+  
+  /* Members */
+
+  
+
+  /* Functions */
+  vector< pair<int, string> > readFile(QString fileName);
+  pair<int, string> tokenize(QString s);
+  
+
 }; 
 
 #endif
