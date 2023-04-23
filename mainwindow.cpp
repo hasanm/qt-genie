@@ -29,6 +29,10 @@ MainWindow::MainWindow(QWidget *parent) :
   combo = new QComboBox(this);
   contentLayout->addWidget(combo, 0, 1);
 
+  searchBox = new QLineEdit(this);
+  connect(searchBox, &QLineEdit::textChanged, this, &MainWindow::onSearch);
+  contentLayout->addWidget(searchBox, 0, 2);
+
 
   connect(combo, &QComboBox::currentTextChanged, this, &MainWindow::onChange); 
 
@@ -188,4 +192,9 @@ void MainWindow::onChange(const QString &text)
 
   attackModel = new QStringListModel(attacks, this);
   attackView->setModel(attackModel);
+}
+
+void MainWindow::onSearch(const QString &text)
+{
+  qDebug() << text; 
 }

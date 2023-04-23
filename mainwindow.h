@@ -35,6 +35,7 @@ protected:
 private slots:
   void onLoad();
   void onChange(const QString &text);
+  void onSearch(const QString &text);
 private:
 
   genie::DatFile *df; 
@@ -45,6 +46,7 @@ private:
 
 
   QComboBox *combo;
+  QLineEdit *searchBox; 
 
   QLineEdit *classEdit;
   QLineEdit *nameEdit;
