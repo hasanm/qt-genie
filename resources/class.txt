@@ -18,6 +18,7 @@
     "19": "UU"
     "20": "Siege Weapon"
     "21": "Standard Building"
+    "23": "Gunpowder"
     "24": "Crossbowman"
     "25": "Monk"
     "27": "Spears"
